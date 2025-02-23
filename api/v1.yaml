@@ -1,0 +1,38 @@
+openapi: 3.1.1
+info:
+  title: ModelServe
+  description: A simple API that serves a model's output.
+  version: 1.0.0
+
+paths:
+  /predict:
+    post:
+      summary: Returns the output of a model's prediction
+      operationId: predict
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  type: string
+                  description: The natural language input that will be passed to the model.
+                required:
+                  - input
+      responses:
+        "200":
+          description: Valid prediction output.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  output:
+                    type: string
+                    description: The output of the model's prediction.
+        "400":
+          description: Bad request due to invalid input.
+        "500":
+          description: Invalid server error.
